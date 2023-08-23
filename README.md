@@ -4,10 +4,11 @@
 
 ## Todo
 
-* [ ] create a `pure` package
-  * [ ] add `pure` package to `go.mod`
-  * [ ] add `pure` package to `go.sum`
-* [ ] print prompt `❯` with `pure` package
-* [ ] test pure package output
+* [x] create a `pure` package
+  * [x] add `pure` package to `go.mod`
+  * [x] add `pure` package to `go.sum`
+* [x] print prompt `❯` with `pure` package
+* [x] test pure package output
+* [ ] create a CLI
 * [ ] add current working directory to prompt
-* [ ] add go information to prompt
+* [ ] add `go version` to prompt when `go.sum` exists
