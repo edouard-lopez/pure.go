@@ -11,5 +11,5 @@ func TestSymbol(t *testing.T) {
 
 	actual := Prompt_symbol()
 
-	be.Unequal(t, actual, expect)
+	be.Equal(t, actual, expect)
 }
