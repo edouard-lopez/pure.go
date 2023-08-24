@@ -2,6 +2,12 @@
 
 > Exploring Golang by re-implementing pure prompt
 
+## Usage
+
+```
+❯ go run ./cmd/cli.go -version --last-command-status $status
+```
+
 ## Todo
 
 * [x] create a `pure` package

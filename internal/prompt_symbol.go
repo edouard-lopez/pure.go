@@ -1,5 +1,5 @@
-package pure
+package prompt_symbol
 
-func Prompt_symbol() string {
+func Get() string {
 	return "❯"
 }

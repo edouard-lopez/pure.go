@@ -1,4 +1,4 @@
-package pure
+package prompt_symbol
 
 import (
 	"testing"
@@ -9,7 +9,7 @@ import (
 func TestSymbol(t *testing.T) {
 	expect := "❯"
 
-	actual := Prompt_symbol()
+	actual := Get()
 
 	be.Equal(t, actual, expect)
 }

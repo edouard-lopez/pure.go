@@ -1,4 +1,4 @@
-module github.com/edouard-lopez/pure.go/pure
+module github.com/edouard-lopez/pure.go
 
 go 1.20
 
