@@ -4,8 +4,21 @@
 
 ## Usage
 
-```
+```sh
 ❯ go run ./cmd/cli.go -version --last-command-status $status
+```
+
+or the built binary
+
+```sh
+❯ make build
+❯ ./pure --last-command-status $status
+```
+
+## Build
+
+```sh
+❯ make build
 ```
 
 ## Todo
