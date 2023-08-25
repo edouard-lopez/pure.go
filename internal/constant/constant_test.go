@@ -21,3 +21,11 @@ func TestExitCodeSuccess(t *testing.T) {
 
 	be.Equal(t, actual, expect)
 }
+
+func TestPromptSymbol(t *testing.T) {
+	expect := "❯"
+
+	actual := PromptSymbol
+
+	be.Equal(t, actual, expect)
+}

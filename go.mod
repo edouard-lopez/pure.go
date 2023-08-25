@@ -2,20 +2,22 @@ module github.com/edouard-lopez/pure.go
 
 go 1.20
 
-require github.com/carlmjohnson/be v0.23.1
+require (
+	github.com/carlmjohnson/be v0.23.1
+	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
+	github.com/google/goexpect v0.0.0-20210430020637-ab937bf7fd6f
+	github.com/google/goterm v0.0.0-20190703233501-fc88cf888a3f
+	github.com/leaanthony/clir v1.6.0
+)
 
 require (
-	github.com/dnephin/pflag v1.0.7 // indirect
-	github.com/fatih/color v1.13.0 // indirect
-	github.com/fsnotify/fsnotify v1.5.4 // indirect
-	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect
-	github.com/leaanthony/clir v1.6.0 // indirect
-	github.com/mattn/go-colorable v0.1.12 // indirect
-	github.com/mattn/go-isatty v0.0.14 // indirect
-	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
-	golang.org/x/sync v0.0.0-20220601150217-0de741cfad7f // indirect
+	github.com/golang/protobuf v1.3.3 // indirect
+	github.com/google/go-cmp v0.5.8 // indirect
+	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
+	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f // indirect
 	golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8 // indirect
 	golang.org/x/term v0.0.0-20220526004731-065cf7ba2467 // indirect
-	golang.org/x/tools v0.1.11 // indirect
-	gotest.tools/gotestsum v1.10.1 // indirect
+	golang.org/x/text v0.3.7 // indirect
+	google.golang.org/genproto v0.0.0-20190819201941-24fa4b261c55 // indirect
+	google.golang.org/grpc v1.31.0 // indirect
 )
