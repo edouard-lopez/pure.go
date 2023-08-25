@@ -1,26 +1,29 @@
 package pure
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/carlmjohnson/be"
+	"github.com/edouard-lopez/pure.go/internal/constant"
 )
 
-func PureGet_Last_Command_Succeed(t *testing.T) {
-	expect := "❯0"
-	lastStatusCommand := 0
+func TestGet_Last_Command_Succeed(t *testing.T) {
+	lastStatusCommand := constant.ExitCodeSuccess
 
+	expect := fmt.Sprintf("%v%v", lastStatusCommand, constant.PromptSymbol)
 	actual := Get(lastStatusCommand)
 
 	be.Equal(t, actual, expect)
 
 }
 
-func PureGet_Last_Command_Failed(t *testing.T) {
-	expect := "❯1"
-	lastStatusCommand := 1
+func TestGet_Last_Command_Failed(t *testing.T) {
+	lastStatusCommand := constant.ExitCodeFailure
+
+	expect := fmt.Sprintf("%v%v", lastStatusCommand, constant.PromptSymbol)
 	actual := Get(lastStatusCommand)
 
+	fmt.Println(actual)
 	be.Equal(t, actual, expect)
-
 }

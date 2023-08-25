@@ -7,5 +7,8 @@ import (
 )
 
 func Get(lastStatusCommand int) string {
-	return prompt_symbol.Get() + fmt.Sprint(lastStatusCommand)
+	return fmt.Sprintf("%v%v",
+		lastStatusCommand,
+		prompt_symbol.Get(),
+	)
 }

@@ -26,12 +26,10 @@ func getPureBinPath() string {
 }
 
 func TestCLIE2E(t *testing.T) {
-
 	child, _, err := expect.Spawn(getPureBinPath(), -1)
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	defer child.Close()
 
 	symbol := regexp.MustCompile(constant.PromptSymbol)
@@ -42,6 +40,4 @@ func TestCLIE2E(t *testing.T) {
 
 	expect := fmt.Sprintf("%s%v\n", constant.PromptSymbol, constant.ExitCodeSuccess)
 	be.Equal(t, expect, result)
-
-	// log.Printf("Matches: %v", match)
 }
