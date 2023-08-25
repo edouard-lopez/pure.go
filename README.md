@@ -29,8 +29,9 @@ or the built binary
 * [x] print prompt `❯` with `pure` package
 * [x] test pure package output (with [`be`][be])
 * [x] create a CLI (with [`clîr`][cli])
-* [ ] add current working directory to prompt
+* [x] add current working directory to prompt
 * [ ] add `go version` to prompt when `go.sum` exists
+* [ ] add color to output
 
 [be]: https://github.com/carlmjohnson/be
 [cli]: https://github.com/leaanthony/clir
