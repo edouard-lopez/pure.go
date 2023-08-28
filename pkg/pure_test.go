@@ -1,6 +1,7 @@
 package pure
 
 import (
+	"errors"
 	"log"
 	"os"
 	"testing"
@@ -48,24 +49,25 @@ type MockedRuntime struct {
 	mock.Mock
 }
 
-func (m *MockedRuntime) Version() string {
+func (m *MockedRuntime) Output() ([]byte, error) {
 	args := m.Called()
-	return args.String(0)
+	return []byte(args.String(0)), errors.New("Missing go binary")
 }
 
 func mockGoVersion(fakeVersion string) string {
 	mockRuntime := new(MockedRuntime)
-	mockRuntime.On("Version").Return(fakeVersion)
-	go_version.GetGoVersion = mockRuntime.Version // redefine getGoVersion to use the mock
+	mockRuntime.On("Output").Return(fakeVersion)
+	go_version.GetGoVersion = mockRuntime.Output // redefine go_version.GetGoVersion to use the mock
 
 	return fakeVersion
 }
 
 func TestGet_Last_Command_Succeed(t *testing.T) {
+	mockGoVersion("")
 	expectedPrompt := prompt.Prompt{
 		CurrentWorkingDir: current_working_dir.Get(),
 		Symbol:            prompt_symbol.Get(constants.ExitCodeSuccess),
-		GoVersion:         mockGoVersion(""),
+		GoVersion:         go_version.Get(),
 		LastStatusCommand: constants.ExitCodeSuccess,
 	}
 	expected := expectedPrompt.String()
@@ -77,10 +79,11 @@ func TestGet_Last_Command_Succeed(t *testing.T) {
 }
 
 func TestGet_Last_Command_Failed(t *testing.T) {
+	mockGoVersion("")
 	expectedPrompt := prompt.Prompt{
 		CurrentWorkingDir: current_working_dir.Get(),
 		Symbol:            colorize.Danger(constants.PromptSymbol),
-		GoVersion:         mockGoVersion(""),
+		GoVersion:         go_version.Get(),
 		LastStatusCommand: constants.ExitCodeFailure,
 	}
 	expected := expectedPrompt.String()
@@ -100,10 +103,11 @@ func TestGet_Current_Working_Directory(t *testing.T) {
 	// 	t.Fatal(err)
 	// }
 
+	mockGoVersion("")
 	expectedPrompt := prompt.Prompt{
 		CurrentWorkingDir: current_working_dir.Get(),
 		Symbol:            prompt_symbol.Get(constants.ExitCodeSuccess),
-		GoVersion:         mockGoVersion(""),
+		GoVersion:         go_version.Get(),
 		LastStatusCommand: constants.ExitCodeSuccess,
 	}
 	expected := expectedPrompt.String()
@@ -114,11 +118,11 @@ func TestGet_Current_Working_Directory(t *testing.T) {
 }
 
 func Test_Get_Go_Version(t *testing.T) {
-
+	mockGoVersion("1.2.3")
 	expectedPrompt := prompt.Prompt{
 		CurrentWorkingDir: current_working_dir.Get(),
 		Symbol:            prompt_symbol.Get(constants.ExitCodeSuccess),
-		GoVersion:         mockGoVersion("1.2.3"),
+		GoVersion:         go_version.Get(),
 		LastStatusCommand: constants.ExitCodeSuccess,
 	}
 	expected := expectedPrompt.String()
