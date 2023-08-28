@@ -17,20 +17,21 @@ permissions:
 jobs:
   test:
     name: Unit Test
-    strategy:
-      matrix:
-        go: ["1.20.x"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
       - name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v4
         with:
-          go-version: ${{ matrix.go }}
+          go-version: "1.20"
+      - run: go version
+
+      - run: make install
+        name: Install dependencies
 
       - run: make test
-        name: all test
+        name: Execute all tests
 
       - uses: codecov/codecov-action@v2
         name: codecov-umbrella

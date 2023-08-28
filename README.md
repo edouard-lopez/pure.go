@@ -1,24 +1,78 @@
-# pure.go
+# pure.go :goat
 
 > Exploring Golang by re-implementing pure prompt
 
 ## Usage
 
+1. Download the [release] binary for you OS/Arch
+1. Try to execute manually
+
+    ```sh
+    /path/to/pure -version --last-command-status $status
+    ```
+
+1. Edit your [Fish](#fish), [Zsh](#zsh) or [Bash](#bash) prompt (see below).
+
+## Configuring Shell Prompt
+
+### Fish
+
+Edit `$__fish_config_dir/functions/fish_prompt.fish` with:
+
+```fish
+function fish_prompt
+    /path/to/pure -version --last-command-status $status
+end
+```
+
+### Zsh
+
+```zsh
+PROMPT=$(/path/to/pure -version --last-command-status $status)
+```
+
+### Bash
+
+```sh
+export PS1='$(/path/to/pure -version --last-command-status $status)'
+```
+
+## Development
+
+### Usage
+
 ```sh
 ❯ go run ./cmd/cli.go -version --last-command-status $status
 ```
 
-or the built binary
+or with the built binary
 
 ```sh
 ❯ make build
 ❯ ./pure --last-command-status $status
+# or
+❯ make demo
+```
+
+### Install
+
+```sh
+❯ make install
+```
+
+### Test
+
+```sh
+❯ make test
 ```
 
 ## Build
 
+Create a `pure` binary in the project's root directory.
+
 ```sh
 ❯ make build
+❯ ./pure --last-command-status $status
 ```
 
 ## Todo
@@ -35,3 +89,4 @@ or the built binary
 
 [test]: https://github.com/stretchr/testify/
 [cli]: https://github.com/leaanthony/clir
+[release]: https://github.com/edouard-lopez/pure.go/releases/

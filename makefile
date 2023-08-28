@@ -1,3 +1,8 @@
+.PHONY: install
+install:
+	go install gotest.tools/gotestsum@latest
+	go install github.com/goreleaser/goreleaser/...@latest
+
 .PHONY: test
 test:
 	gotestsum \
