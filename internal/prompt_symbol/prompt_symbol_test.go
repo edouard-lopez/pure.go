@@ -3,14 +3,14 @@ package prompt_symbol
 import (
 	"testing"
 
-	"github.com/carlmjohnson/be"
 	"github.com/edouard-lopez/pure.go/internal/constants"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestSymbol(t *testing.T) {
-	expect := constants.PromptSymbol
+	expected := constants.PromptSymbol
 
 	actual := Get()
 
-	be.Equal(t, actual, expect)
+	assert.Equal(t, expected, actual)
 }

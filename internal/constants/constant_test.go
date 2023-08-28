@@ -3,29 +3,29 @@ package constants
 import (
 	"testing"
 
-	"github.com/carlmjohnson/be"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestExitCodeFailure(t *testing.T) {
-	expect := 1
+	expected := 1
 
 	actual := ExitCodeFailure
 
-	be.Equal(t, actual, expect)
+	assert.Equal(t, expected, actual)
 }
 
 func TestExitCodeSuccess(t *testing.T) {
-	expect := 0
+	expected := 0
 
 	actual := ExitCodeSuccess
 
-	be.Equal(t, actual, expect)
+	assert.Equal(t, expected, actual)
 }
 
 func TestPromptSymbol(t *testing.T) {
-	expect := "❯"
+	expected := "❯"
 
 	actual := PromptSymbol
 
-	be.Equal(t, actual, expect)
+	assert.Equal(t, expected, actual)
 }

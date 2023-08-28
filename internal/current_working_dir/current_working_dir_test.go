@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/carlmjohnson/be"
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_Get_Current_Directory(t *testing.T) {
@@ -13,7 +13,7 @@ func Test_Get_Current_Directory(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	expect, err := os.Getwd()
+	expected, err := os.Getwd()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -23,15 +23,15 @@ func Test_Get_Current_Directory(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	be.Equal(t, actual, expect)
+	assert.Equal(t, expected, actual)
 }
 
 func Test_ReplaceByTilde(t *testing.T) {
-	expect := "~"
+	expected := "~"
 
 	actual := ReplaceByTilde("/home/" + os.Getenv("USER"))
 
-	be.Equal(t, actual, expect)
+	assert.Equal(t, expected, actual)
 }
 
 func Test_Get_Home_Directory_Replace_By_Tilde(t *testing.T) {
@@ -44,9 +44,9 @@ func Test_Get_Home_Directory_Replace_By_Tilde(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	expect := ReplaceByTilde(current_working_dir)
+	expected := ReplaceByTilde(current_working_dir)
 
 	actual := Get()
 
-	be.Equal(t, actual, expect)
+	assert.Equal(t, expected, actual)
 }

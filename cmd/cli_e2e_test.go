@@ -37,6 +37,6 @@ func TestCLIE2E(t *testing.T) {
 		log.Fatalf("\nExpected: %q\nGot: %q\nError: %v", symbol, result, err)
 	}
 
-	// expect := fmt.Sprintf("%s%v\n", constant.PromptSymbol, constant.ExitCodeSuccess)
-	// be.Equal(t, expect, result)
+	// expected := fmt.Sprintf("%s%v\n", constant.PromptSymbol, constant.ExitCodeSuccess)
+	// assert.Equal(t, expected, actual)
 }

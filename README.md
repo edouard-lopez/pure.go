@@ -27,11 +27,11 @@ or the built binary
   * [x] add `pure` package to `go.mod`
   * [x] add `pure` package to `go.sum`
 * [x] print prompt `❯` with `pure` package
-* [x] test pure package output (with [`be`][be])
+* [x] test pure package output (with [`testify`][test])
 * [x] create a CLI (with [`clîr`][cli])
 * [x] add current working directory to prompt
 * [ ] add `go version` to prompt when `go.sum` exists
 * [ ] add color to output
 
-[be]: https://github.com/carlmjohnson/be
+[test]: https://github.com/stretchr/testify/
 [cli]: https://github.com/leaanthony/clir

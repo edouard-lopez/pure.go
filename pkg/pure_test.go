@@ -6,9 +6,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/carlmjohnson/be"
 	"github.com/edouard-lopez/pure.go/internal/constants"
 	"github.com/edouard-lopez/pure.go/internal/current_working_dir"
+	"github.com/stretchr/testify/assert"
 )
 
 var cwd string
@@ -25,12 +25,12 @@ func changeToTmpDir() string {
 		log.Fatal(err)
 	}
 
-	expect, err := os.Getwd()
+	expected, err := os.Getwd()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return expect
+	return expected
 }
 
 func TestMain(m *testing.M) {
@@ -43,21 +43,21 @@ func TestMain(m *testing.M) {
 func TestGet_Last_Command_Succeed(t *testing.T) {
 	lastStatusCommand := constants.ExitCodeSuccess
 
-	expect := fmt.Sprintf(constants.PromptLayout, cwd, lastStatusCommand, constants.PromptSymbol)
+	expected := fmt.Sprintf(constants.PromptLayout, cwd, lastStatusCommand, constants.PromptSymbol)
 	actual := Get(lastStatusCommand)
 
-	be.Equal(t, actual, expect)
+	assert.Equal(t, expected, actual)
 
 }
 
 func TestGet_Last_Command_Failed(t *testing.T) {
 	lastStatusCommand := constants.ExitCodeFailure
 
-	expect := fmt.Sprintf(constants.PromptLayout, cwd, lastStatusCommand, constants.PromptSymbol)
+	expected := fmt.Sprintf(constants.PromptLayout, cwd, lastStatusCommand, constants.PromptSymbol)
 	actual := Get(lastStatusCommand)
 
 	fmt.Println(actual)
-	be.Equal(t, actual, expect)
+	assert.Equal(t, expected, actual)
 }
 
 func TestGet_Current_Working_Directory(t *testing.T) {
@@ -72,13 +72,13 @@ func TestGet_Current_Working_Directory(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	expect := fmt.Sprintf(constants.PromptLayout,
+	expected := fmt.Sprintf(constants.PromptLayout,
 		current_working_dir.ReplaceByTilde(cwd),
 		lastStatusCommand,
 		constants.PromptSymbol,
 	)
 	actual := Get(lastStatusCommand)
 
-	be.Equal(t, actual, expect)
+	assert.Equal(t, expected, actual)
 
 }
