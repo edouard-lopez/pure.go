@@ -4,6 +4,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/edouard-lopez/pure.go/internal/colorize"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -13,10 +14,11 @@ func Test_Get_Current_Directory(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	expected, err := os.Getwd()
+	cwd, err := os.Getwd()
 	if err != nil {
 		t.Fatal(err)
 	}
+	expected := colorize.Mute(cwd)
 
 	actual := Get()
 	if err != nil {
@@ -26,7 +28,7 @@ func Test_Get_Current_Directory(t *testing.T) {
 	assert.Equal(t, expected, actual)
 }
 
-func Test_ReplaceByTilde(t *testing.T) {
+func Test_Replace_By_Tilde(t *testing.T) {
 	expected := "~"
 
 	actual := ReplaceByTilde("/home/" + os.Getenv("USER"))
@@ -34,7 +36,7 @@ func Test_ReplaceByTilde(t *testing.T) {
 	assert.Equal(t, expected, actual)
 }
 
-func Test_Get_Home_Directory_Replace_By_Tilde(t *testing.T) {
+func Test_Get_Home_Directory_Is_Replace_By_Tilde(t *testing.T) {
 	err := os.Chdir(os.Getenv("HOME"))
 	if err != nil {
 		t.Fatal(err)
@@ -44,7 +46,7 @@ func Test_Get_Home_Directory_Replace_By_Tilde(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	expected := ReplaceByTilde(current_working_dir)
+	expected := colorize.Mute(ReplaceByTilde(current_working_dir))
 
 	actual := Get()
 

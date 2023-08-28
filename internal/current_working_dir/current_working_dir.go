@@ -4,6 +4,8 @@ import (
 	"log"
 	"os"
 	"strings"
+
+	"github.com/edouard-lopez/pure.go/internal/colorize"
 )
 
 func ReplaceByTilde(path string) string {
@@ -21,5 +23,5 @@ func Get() string {
 	}
 	cwd := ReplaceByTilde(current_working_dir)
 
-	return cwd
+	return colorize.Mute(cwd)
 }

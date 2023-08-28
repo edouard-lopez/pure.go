@@ -15,7 +15,7 @@ func Get(lastStatusCommand int) string {
 	_prompt := prompt.Prompt{
 		CurrentWorkingDir: current_working_dir.Get(),
 		LastStatusCommand: lastStatusCommand,
-		Symbol:            prompt_symbol.Get(),
+		Symbol:            prompt_symbol.Get(lastStatusCommand),
 		GoVersion:         go_version.Get(),
 	}
 

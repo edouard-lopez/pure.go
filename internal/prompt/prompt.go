@@ -5,7 +5,7 @@ import (
 	"text/template"
 )
 
-const PromptLayout = "{{.CurrentWorkingDir}}{{if .GoVersion}} 🐐{{.GoVersion}}{{end}}\n{{.LastStatusCommand}} {{.Symbol}}"
+const PromptLayout = "{{.CurrentWorkingDir}}{{if .GoVersion}} 🐐{{.GoVersion}}{{end}}\n{{.Symbol}}"
 
 type Prompt struct {
 	CurrentWorkingDir string
