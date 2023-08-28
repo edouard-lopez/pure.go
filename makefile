@@ -34,3 +34,7 @@ demo: build
 	./pure --last-command-status 0
 	./pure --last-command-status 1
 
+
+.PHONY: test-coverage
+test-coverage:
+	go test -v -count=1 -race -coverprofile=./coverage-unit.txt -covermode=atomic ./...
