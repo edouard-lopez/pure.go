@@ -2,16 +2,26 @@
 
 > Exploring Golang by re-implementing pure prompt
 
-## Usage
+## Installation
 
 1. Download the [release] binary for you OS/Arch
-1. Try to execute manually
+2. Allow execution
 
     ```sh
-    /path/to/pure -version --last-command-status $status
+    chmod u+x /path/to/pure
     ```
 
-1. Edit your [Fish](#fish), [Zsh](#zsh) or [Bash](#bash) prompt (see below).
+3. Try to execute manually
+
+    ```sh
+    $ /path/to/pure -version --last-command-status $status
+    # should print something like:
+    ~/projects/contributions/pure.go 🐐go1.20.3
+    0 ❯
+    ```
+
+
+4. Edit your [Fish](#fish), [Zsh](#zsh) or [Bash](#bash) prompt (see below).
 
 ## Configuring Shell Prompt
 
@@ -84,7 +94,8 @@ Create a `pure` binary in the project's root directory.
 * [x] test pure package output (with [`testify`][test])
 * [x] create a CLI (with [`clîr`][cli])
 * [x] add current working directory to prompt
-* [ ] add `go version` to prompt when `go.sum` exists
+* [x] add `go version` to prompt when `go.sum` exists
+* [x] configure Goreleaser
 * [ ] add color to output
 
 [test]: https://github.com/stretchr/testify/
