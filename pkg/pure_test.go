@@ -1,13 +1,13 @@
 package pure
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"testing"
 
 	"github.com/edouard-lopez/pure.go/internal/constants"
 	"github.com/edouard-lopez/pure.go/internal/current_working_dir"
+	"github.com/edouard-lopez/pure.go/internal/prompt"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -41,44 +41,67 @@ func TestMain(m *testing.M) {
 }
 
 func TestGet_Last_Command_Succeed(t *testing.T) {
-	lastStatusCommand := constants.ExitCodeSuccess
+	prompt := prompt.Prompt{
+		CurrentWorkingDir: current_working_dir.Get(),
+		LastStatusCommand: constants.ExitCodeSuccess,
+		Symbol:            constants.PromptSymbol,
+		GoVersion:         "1.8.3",
+	}
+	expected := prompt.String()
 
-	expected := fmt.Sprintf(constants.PromptLayout, cwd, lastStatusCommand, constants.PromptSymbol)
-	actual := Get(lastStatusCommand)
+	actual := Get(prompt.LastStatusCommand)
 
 	assert.Equal(t, expected, actual)
 
 }
 
 func TestGet_Last_Command_Failed(t *testing.T) {
-	lastStatusCommand := constants.ExitCodeFailure
+	prompt := prompt.Prompt{
+		CurrentWorkingDir: current_working_dir.Get(),
+		LastStatusCommand: constants.ExitCodeFailure,
+		Symbol:            constants.PromptSymbol,
+		GoVersion:         "1.8.3",
+	}
+	expected := prompt.String()
 
-	expected := fmt.Sprintf(constants.PromptLayout, cwd, lastStatusCommand, constants.PromptSymbol)
-	actual := Get(lastStatusCommand)
+	actual := Get(prompt.LastStatusCommand)
 
-	fmt.Println(actual)
 	assert.Equal(t, expected, actual)
 }
 
 func TestGet_Current_Working_Directory(t *testing.T) {
-	lastStatusCommand := constants.ExitCodeSuccess
 	err := os.Chdir(os.Getenv("HOME"))
 	if err != nil {
 		t.Fatal(err)
 	}
-
 	cwd, err := os.Getwd()
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	expected := fmt.Sprintf(constants.PromptLayout,
-		current_working_dir.ReplaceByTilde(cwd),
-		lastStatusCommand,
-		constants.PromptSymbol,
-	)
-	actual := Get(lastStatusCommand)
+	prompt := prompt.Prompt{
+		CurrentWorkingDir: current_working_dir.ReplaceByTilde(cwd),
+		LastStatusCommand: constants.ExitCodeSuccess,
+		Symbol:            constants.PromptSymbol,
+		GoVersion:         "1.8.3",
+	}
+	expected := prompt.String()
+
+	actual := Get(prompt.LastStatusCommand)
 
 	assert.Equal(t, expected, actual)
+}
 
+func Test_Get_Go_Version(t *testing.T) {
+	prompt := prompt.Prompt{
+		CurrentWorkingDir: current_working_dir.Get(),
+		LastStatusCommand: constants.ExitCodeSuccess,
+		Symbol:            constants.PromptSymbol,
+		GoVersion:         "1.8.3",
+	}
+	expected := prompt.String()
+
+	actual := Get(prompt.LastStatusCommand)
+
+	assert.Equal(t, expected, actual)
 }
