@@ -23,3 +23,4 @@ go.work
 coverage-unit.txt
 
 dist/
+./pure
