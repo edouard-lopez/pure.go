@@ -31,12 +31,12 @@ func TestCLIE2E(t *testing.T) {
 	}
 	defer child.Close()
 
-	symbol := regexp.MustCompile(constants.PromptSymbol)
-	result, _, err := child.Expect(symbol, time.Second)
+	symbol := regexp.MustCompile("(?m)" + constants.PromptSymbol)
+	actual, _, err := child.Expect(symbol, time.Second)
 	if err != nil {
-		log.Fatalf("\nExpected: %q\nGot: %q\nError: %v", symbol, result, err)
+		log.Fatalf("\nExpected: %q\nGot: %q\nError: %v", symbol, actual, err)
 	}
 
-	// expected := fmt.Sprintf("%s%v\n", constant.PromptSymbol, constant.ExitCodeSuccess)
+	// expected := fmt.Sprintf("%s%v\n", constants.PromptSymbol, constants.ExitCodeSuccess)
 	// assert.Equal(t, expected, actual)
 }
