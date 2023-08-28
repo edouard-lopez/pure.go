@@ -1,10 +1,16 @@
-# pure.go :goat
+# pure.go 🐐
 
-> Exploring Golang by re-implementing pure prompt
+> Exploring [Golang][go] by re-implementing [pure][pure] prompt.
+>
+> :information_source: This is a really basic and naive implementation.
+
+### Preview
+
+![preview pure.go](./preview.png)
 
 ## Installation
 
-1. Download the [release] binary for you OS/Arch
+1. Download the [release] binary for your OS/Arch
 2. Allow execution
 
     ```sh
@@ -19,7 +25,6 @@
     ~/projects/contributions/pure.go 🐐go1.20.3
     0 ❯
     ```
-
 
 4. Edit your [Fish](#fish), [Zsh](#zsh) or [Bash](#bash) prompt (see below).
 
@@ -96,8 +101,10 @@ Create a `pure` binary in the project's root directory.
 * [x] add current working directory to prompt
 * [x] add `go version` to prompt when `go.sum` exists
 * [x] configure Goreleaser
-* [ ] add color to output
+* [x] add color to output
 
 [test]: https://github.com/stretchr/testify/
 [cli]: https://github.com/leaanthony/clir
 [release]: https://github.com/edouard-lopez/pure.go/releases/
+[pure]: https://github.com/pure-fish/pure/
+[go]: go.dev/
