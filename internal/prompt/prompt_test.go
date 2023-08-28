@@ -11,10 +11,10 @@ func Test_Prompt_serialize_correctly(t *testing.T) {
 		CurrentWorkingDir: "/home/edouard",
 		LastStatusCommand: 0,
 		Symbol:            "❯",
-		GoVersion:         "1.13.4",
+		GoVersion:         "1.2.3",
 	}
 
-	expected := "/home/edouard\n0 ❯"
+	expected := "/home/edouard 🐐1.2.3\n0 ❯"
 
 	actual := prompt.String()
 

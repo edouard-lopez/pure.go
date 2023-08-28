@@ -8,7 +8,9 @@ import (
 	"github.com/edouard-lopez/pure.go/internal/constants"
 	"github.com/edouard-lopez/pure.go/internal/current_working_dir"
 	"github.com/edouard-lopez/pure.go/internal/prompt"
+	"github.com/edouard-lopez/pure.go/internal/segments/go_version"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 )
 
 var cwd string
@@ -40,31 +42,48 @@ func TestMain(m *testing.M) {
 	m.Run()
 }
 
-func TestGet_Last_Command_Succeed(t *testing.T) {
-	prompt := prompt.Prompt{
-		CurrentWorkingDir: current_working_dir.Get(),
-		LastStatusCommand: constants.ExitCodeSuccess,
-		Symbol:            constants.PromptSymbol,
-		GoVersion:         "1.8.3",
-	}
-	expected := prompt.String()
+type MockedRuntime struct {
+	mock.Mock
+}
 
-	actual := Get(prompt.LastStatusCommand)
+func (m *MockedRuntime) Version() string {
+	args := m.Called()
+	return args.String(0)
+}
+
+func mockGoVersion(fakeVersion string) string {
+	mockRuntime := new(MockedRuntime)
+	mockRuntime.On("Version").Return(fakeVersion)
+	go_version.GetGoVersion = mockRuntime.Version // redefine getGoVersion to use the mock
+
+	return fakeVersion
+}
+
+func TestGet_Last_Command_Succeed(t *testing.T) {
+	expectedPrompt := prompt.Prompt{
+		CurrentWorkingDir: current_working_dir.Get(),
+		Symbol:            constants.PromptSymbol,
+		GoVersion:         mockGoVersion(""),
+		LastStatusCommand: constants.ExitCodeSuccess,
+	}
+	expected := expectedPrompt.String()
+
+	actual := Get(expectedPrompt.LastStatusCommand)
 
 	assert.Equal(t, expected, actual)
 
 }
 
 func TestGet_Last_Command_Failed(t *testing.T) {
-	prompt := prompt.Prompt{
+	expectedPrompt := prompt.Prompt{
 		CurrentWorkingDir: current_working_dir.Get(),
-		LastStatusCommand: constants.ExitCodeFailure,
 		Symbol:            constants.PromptSymbol,
-		GoVersion:         "1.8.3",
+		GoVersion:         mockGoVersion(""),
+		LastStatusCommand: constants.ExitCodeFailure,
 	}
-	expected := prompt.String()
+	expected := expectedPrompt.String()
 
-	actual := Get(prompt.LastStatusCommand)
+	actual := Get(expectedPrompt.LastStatusCommand)
 
 	assert.Equal(t, expected, actual)
 }
@@ -79,29 +98,30 @@ func TestGet_Current_Working_Directory(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	prompt := prompt.Prompt{
+	expectedPrompt := prompt.Prompt{
 		CurrentWorkingDir: current_working_dir.ReplaceByTilde(cwd),
-		LastStatusCommand: constants.ExitCodeSuccess,
 		Symbol:            constants.PromptSymbol,
-		GoVersion:         "1.8.3",
+		GoVersion:         mockGoVersion(""),
+		LastStatusCommand: constants.ExitCodeSuccess,
 	}
-	expected := prompt.String()
+	expected := expectedPrompt.String()
 
-	actual := Get(prompt.LastStatusCommand)
+	actual := Get(expectedPrompt.LastStatusCommand)
 
 	assert.Equal(t, expected, actual)
 }
 
 func Test_Get_Go_Version(t *testing.T) {
-	prompt := prompt.Prompt{
-		CurrentWorkingDir: current_working_dir.Get(),
-		LastStatusCommand: constants.ExitCodeSuccess,
-		Symbol:            constants.PromptSymbol,
-		GoVersion:         "1.8.3",
-	}
-	expected := prompt.String()
 
-	actual := Get(prompt.LastStatusCommand)
+	expectedPrompt := prompt.Prompt{
+		CurrentWorkingDir: current_working_dir.Get(),
+		Symbol:            constants.PromptSymbol,
+		GoVersion:         mockGoVersion("1.2.3"),
+		LastStatusCommand: constants.ExitCodeSuccess,
+	}
+	expected := expectedPrompt.String()
+
+	actual := Get(expectedPrompt.LastStatusCommand)
 
 	assert.Equal(t, expected, actual)
 }

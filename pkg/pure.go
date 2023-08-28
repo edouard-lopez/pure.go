@@ -5,26 +5,26 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/edouard-lopez/pure.go/internal/constants"
 	"github.com/edouard-lopez/pure.go/internal/current_working_dir"
 	"github.com/edouard-lopez/pure.go/internal/prompt"
-	prompt_symbol "github.com/edouard-lopez/pure.go/internal/prompt_symbol"
+	"github.com/edouard-lopez/pure.go/internal/prompt_symbol"
+	"github.com/edouard-lopez/pure.go/internal/segments/go_version"
 )
 
 func Get(lastStatusCommand int) string {
-	prompt := prompt.Prompt{
+	_prompt := prompt.Prompt{
 		CurrentWorkingDir: current_working_dir.Get(),
 		LastStatusCommand: lastStatusCommand,
 		Symbol:            prompt_symbol.Get(),
-		GoVersion:         prompt_symbol.Get(),
+		GoVersion:         go_version.Get(),
 	}
 
 	var renderedMessage strings.Builder
-	promptTemplate := template.Must(template.New("prompt").Parse(constants.PromptLayout))
-	err := promptTemplate.Execute(&renderedMessage, prompt)
+	promptTemplate := template.Must(template.New("prompt").Parse(prompt.PromptLayout))
+	err := promptTemplate.Execute(&renderedMessage, _prompt)
 	if err != nil {
 		panic(err)
 	}
 
-	return fmt.Sprint(prompt.String())
+	return fmt.Sprint(_prompt.String())
 }

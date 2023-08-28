@@ -20,7 +20,7 @@ func Test_Get(t *testing.T) {
 	mockRuntime := new(MockedRuntime)
 	expectedVersion := "0.0.1"
 	mockRuntime.On("Version").Return(expectedVersion)
-	getGoVersion = mockRuntime.Version // redefine getGoVersion to use the mock
+	GetGoVersion = mockRuntime.Version // redefine getGoVersion to use the mock
 
 	result := Get()
 

@@ -3,9 +3,9 @@ package prompt
 import (
 	"strings"
 	"text/template"
-
-	"github.com/edouard-lopez/pure.go/internal/constants"
 )
+
+const PromptLayout = "{{.CurrentWorkingDir}}{{if .GoVersion}} 🐐{{.GoVersion}}{{end}}\n{{.LastStatusCommand}} {{.Symbol}}"
 
 type Prompt struct {
 	CurrentWorkingDir string
@@ -17,7 +17,7 @@ type Prompt struct {
 func (prompt Prompt) String() string {
 	var renderedMessage strings.Builder
 
-	promptTemplate := template.Must(template.New("prompt").Parse(constants.PromptLayout))
+	promptTemplate := template.Must(template.New("prompt").Parse(PromptLayout))
 	err := promptTemplate.Execute(&renderedMessage, prompt)
 	if err != nil {
 		panic(err)
