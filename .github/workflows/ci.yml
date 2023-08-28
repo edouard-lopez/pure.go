@@ -31,7 +31,10 @@ jobs:
         name: Install dependencies
 
       - run: make test
-        name: Execute all tests
+        name: Execute unit tests
+
+      - run: make test-e2e
+        name: Execute End-to-end tests only
 
       - uses: codecov/codecov-action@v2
         name: codecov-umbrella

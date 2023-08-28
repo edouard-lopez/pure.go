@@ -7,7 +7,7 @@ install:
 test:
 	gotestsum \
 		--format testname \
-	./...
+	$$(go list ./... | grep -v '/cmd')	
 
 .PHONY: test-watch
 test-watch:
@@ -43,3 +43,16 @@ demo: build
 .PHONY: test-coverage
 test-coverage:
 	go test -v -count=1 -race -coverprofile=./coverage-unit.txt -covermode=atomic ./...
+
+
+.PHONY: test-all
+test-all: build
+	gotestsum \
+		--format testname \
+	./...
+
+.PHONY: test-e2e # only the e2e tests
+test-e2e: build
+	gotestsum \
+		--format testname \
+	./cmd
