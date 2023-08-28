@@ -28,3 +28,9 @@ build:
 		-o pure \
 		cmd/cli.go
 	chmod u+x pure
+
+.PHONY: demo
+demo: build
+	./pure --last-command-status 0
+	./pure --last-command-status 1
+
