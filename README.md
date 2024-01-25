@@ -1,4 +1,4 @@
-# pure.go 🐐
+# pure.go 🐐 [![CI](https://github.com/edouard-lopez/pure.go/actions/workflows/ci.yml/badge.svg)](https://github.com/edouard-lopez/pure.go/actions/workflows/ci.yml)
 
 > Exploring [Golang][go] by re-implementing [pure][pure] prompt.
 >
