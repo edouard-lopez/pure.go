@@ -108,3 +108,13 @@ Create a `pure` binary in the project's root directory.
 [release]: https://github.com/edouard-lopez/pure.go/releases/
 [pure]: https://github.com/pure-fish/pure/
 [go]: go.dev/
+
+## Ports
+
+* Original [sindresorhus/pure](https://github.com/sindresorhus/pure) Zsh implementation ;
+* :fish: [pure-fish/pure](https://github.com/pure-fish/pure/) Fish implementation (features rich) ;
+* :snake: [edouard-lopez/pure.py](https://github.com/edouard-lopez/pure.py/) Python implementation  (partial features) ;
+* :goat: [edouard-lopez/pure.go](https://github.com/edouard-lopez/pure.go/) Golang implementation  (partial features) ;
+* :gear: [xcambar/purs](https://github.com/xcambar/purs) Rust implementation ;
+* :window: [nickcox/pure-pwsh](https://github.com/nickcox/pure-pwsh/) PowerShell implementation.
+* :shell: [krashikiworks/pure-prompt-bash](https://github.com/krashikiworks/pure-prompt-bash) Bash implementation.
