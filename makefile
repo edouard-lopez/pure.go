@@ -1,7 +1,7 @@
 .PHONY: install
 install:
-	go install gotest.tools/gotestsum@latest
-	go install github.com/goreleaser/goreleaser/...@latest
+	go install gotest.tools/gotestsum@v1.11.0 
+	go install github.com/goreleaser/goreleaser/...@v1.21.2
 
 .PHONY: test
 test:
