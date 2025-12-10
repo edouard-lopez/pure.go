@@ -5,7 +5,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/edouard-lopez/pure.go/internal/current_working_dir"
+	"github.com/edouard-lopez/pure.go/internal/segments/current_working_dir"
 	"github.com/edouard-lopez/pure.go/internal/prompt"
 	"github.com/edouard-lopez/pure.go/internal/prompt_symbol"
 	"github.com/edouard-lopez/pure.go/internal/segments/go_version"
