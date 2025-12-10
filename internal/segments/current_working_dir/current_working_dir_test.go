@@ -18,7 +18,7 @@ func Test_Get_Current_Directory(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	expected := colorize.Mute(cwd)
+	expected := colorize.Primary(cwd)
 
 	actual := Get()
 	if err != nil {
@@ -46,7 +46,7 @@ func Test_Get_Home_Directory_Is_Replace_By_Tilde(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	expected := colorize.Mute(ReplaceByTilde(current_working_dir))
+	expected := colorize.Primary(ReplaceByTilde(current_working_dir))
 
 	actual := Get()
 

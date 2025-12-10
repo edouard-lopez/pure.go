@@ -23,5 +23,5 @@ func Get() string {
 	}
 	cwd := ReplaceByTilde(current_working_dir)
 
-	return colorize.Mute(cwd)
+	return colorize.Primary(cwd)
 }
