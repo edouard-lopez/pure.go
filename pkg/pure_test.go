@@ -8,9 +8,10 @@ import (
 
 	"github.com/edouard-lopez/pure.go/internal/colorize"
 	"github.com/edouard-lopez/pure.go/internal/constants"
-	"github.com/edouard-lopez/pure.go/internal/segments/current_working_dir"
 	"github.com/edouard-lopez/pure.go/internal/prompt"
 	"github.com/edouard-lopez/pure.go/internal/prompt_symbol"
+	"github.com/edouard-lopez/pure.go/internal/segments/current_working_dir"
+	"github.com/edouard-lopez/pure.go/internal/segments/git_branch"
 	"github.com/edouard-lopez/pure.go/internal/segments/go_version"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -124,6 +125,23 @@ func Test_Get_Go_Version(t *testing.T) {
 		Symbol:            prompt_symbol.Get(constants.ExitCodeSuccess),
 		GoVersion:         go_version.Get(),
 		LastStatusCommand: constants.ExitCodeSuccess,
+	}
+	expected := expectedPrompt.String()
+
+	actual := Get(expectedPrompt.LastStatusCommand)
+
+	assert.Equal(t, expected, actual)
+}
+
+func Test_Get_Git_Branch(t *testing.T) {
+	cleanup := git_branch.FixtureGitBranch(t, "feature/test-branch")
+	defer cleanup()
+	expectedPrompt := prompt.Prompt{
+		CurrentWorkingDir: current_working_dir.Get(),
+		Symbol:            prompt_symbol.Get(constants.ExitCodeSuccess),
+		GoVersion:         go_version.Get(),
+		LastStatusCommand: constants.ExitCodeSuccess,
+		GitBranch:         git_branch.Get(),
 	}
 	expected := expectedPrompt.String()
 

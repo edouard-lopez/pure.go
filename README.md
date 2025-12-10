@@ -102,6 +102,8 @@ Create a `pure` binary in the project's root directory.
 * [x] add `go version` to prompt when `go.sum` exists
 * [x] configure Goreleaser
 * [x] add color to output
+* [ ] Add Git segments
+  * [ ] add Git branch segment
 
 [test]: https://github.com/stretchr/testify/
 [cli]: https://github.com/leaanthony/clir
