@@ -46,3 +46,35 @@ jobs:
           files: ./.ignore/coverage.txt
           verbose: true
           flags: unittests,spec
+
+  agnostic-tests:
+    # Black-box suite shared by every Pure implementation (fish, python, go).
+    # Checks out the suite, then tests this commit through adapters/go.
+    name: Agnostic tests
+    runs-on: ubuntu-24.04
+    env:
+      IMPLEMENTATION: go
+      BATS_LIB_PATH: /usr/lib/bats
+    steps:
+      - name: Check out pure-fish/agnostic-tests
+        uses: actions/checkout@v4
+        with:
+          repository: pure-fish/agnostic-tests
+          ref: main
+
+      - name: Check out pure.go at this commit
+        uses: actions/checkout@v4
+        with:
+          path: .implementations/under-test
+
+      - name: Install bats
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes bats bats-assert bats-support
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+
+      - name: Run the suite
+        run: make test GO_PURE_DIR="$GITHUB_WORKSPACE/.implementations/under-test"

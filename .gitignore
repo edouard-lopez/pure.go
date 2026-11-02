@@ -23,4 +23,7 @@ go.work
 coverage-unit.txt
 
 dist/
-./pure
+/pure
+
+# Local clone of pure-fish/agnostic-tests (make test-agnostic)
+/.agnostic-tests/

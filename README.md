@@ -79,7 +79,17 @@ or with the built binary
 
 ```sh
 ❯ make test
+❯ make test-agnostic  # cross-implementation suite from pure-fish/agnostic-tests (needs bats)
 ```
+
+### Configuration
+
+Set `PURE_*` environment variables, named like Fish's `pure_*` variables in upper case:
+
+| Variable | Default | Description |
+| :------- | :------ | :---------- |
+| `PURE_SYMBOL_PROMPT` | `❯` | Prompt symbol. |
+| `PURE_SYMBOL_GIT_DIRTY` | `*` | Shown after the branch when the repository has changes. |
 
 ## Build
 
@@ -102,8 +112,11 @@ Create a `pure` binary in the project's root directory.
 * [x] add `go version` to prompt when `go.sum` exists
 * [x] configure Goreleaser
 * [x] add color to output
-* [ ] Add Git segments
-  * [ ] add Git branch segment
+* [x] Add Git segments
+  * [x] add Git branch segment
+  * [x] add Git dirty segment
+* [x] start the prompt with a blank line
+* [x] pass [pure-fish/agnostic-tests](https://github.com/pure-fish/agnostic-tests) in CI
 
 [test]: https://github.com/stretchr/testify/
 [cli]: https://github.com/leaanthony/clir
