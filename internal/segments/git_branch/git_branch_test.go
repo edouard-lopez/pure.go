@@ -36,3 +36,20 @@ func Test_Get_Git_Branch_Repository(t *testing.T) {
 
 	assert.Equal(t, expected, actual)
 }
+
+func Test_Get_Git_Branch_From_Subdirectory(t *testing.T) {
+	branchName := "feature/subdir"
+	cleanup := FixtureGitBranch(t, branchName)
+	defer cleanup()
+	if err := os.Mkdir("subdir", 0o755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Chdir("subdir"); err != nil {
+		t.Fatal(err)
+	}
+
+	expected := colorize.Mute(branchName)
+	actual := Get()
+
+	assert.Equal(t, expected, actual)
+}

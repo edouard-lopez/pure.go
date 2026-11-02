@@ -9,6 +9,7 @@ import (
 	"github.com/edouard-lopez/pure.go/internal/prompt_symbol"
 	"github.com/edouard-lopez/pure.go/internal/segments/current_working_dir"
 	"github.com/edouard-lopez/pure.go/internal/segments/git_branch"
+	"github.com/edouard-lopez/pure.go/internal/segments/git_dirty"
 	"github.com/edouard-lopez/pure.go/internal/segments/go_version"
 )
 
@@ -19,6 +20,7 @@ func Get(lastStatusCommand int) string {
 		Symbol:            prompt_symbol.Get(lastStatusCommand),
 		GoVersion:         go_version.Get(),
 		GitBranch:         git_branch.Get(),
+		GitDirty:          git_dirty.Get(),
 	}
 
 	var renderedMessage strings.Builder

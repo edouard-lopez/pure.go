@@ -1,29 +1,39 @@
 package git_branch
 
 import (
-	"fmt"
-	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/edouard-lopez/pure.go/internal/colorize"
 )
 
-func Get() string {
-	gitDir := ".git"
+// IsInsideWorkTree reports whether the current directory belongs to a git work tree.
+func IsInsideWorkTree() bool {
+	output, err := exec.Command("git", "rev-parse", "--is-inside-work-tree").Output()
+	return err == nil && strings.TrimSpace(string(output)) == "true"
+}
 
-	// Check if .git directory exists
-	if _, err := os.Stat(gitDir); os.IsNotExist(err) {
-		return ""
-	}
-
-	// Get the current branch name
-	cmd := exec.Command("git", "rev-parse", "--abbrev-ref", "HEAD")
-	output, err := cmd.Output()
+// parseBranch mirrors Fish's _pure_parse_git_branch:
+// the branch name, or a ref name on a detached HEAD.
+func parseBranch() string {
+	output, err := exec.Command("git", "symbolic-ref", "--short", "HEAD").Output()
 	if err != nil {
+		output, err = exec.Command("git", "name-rev", "--name-only", "HEAD").Output()
+		if err != nil {
+			return ""
+		}
+	}
+	return strings.TrimSpace(string(output))
+}
+
+func Get() string {
+	if !IsInsideWorkTree() {
 		return ""
 	}
 
-	raw_branch := string(output)
-	branch := raw_branch[:len(raw_branch)-1] // Remove the newline character
-	return colorize.Mute(fmt.Sprintf("%s", branch))
+	branch := parseBranch()
+	if branch == "" {
+		return ""
+	}
+	return colorize.Mute(branch)
 }
