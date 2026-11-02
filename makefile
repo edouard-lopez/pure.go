@@ -66,3 +66,10 @@ test-e2e: build
 	gotestsum \
 		--format testname \
 	./cmd
+# Run the cross-implementation black-box suite (pure-fish/agnostic-tests) on this checkout.
+# Needs bats, bats-support and bats-assert (BATS_LIB_PATH defaults to /usr/lib/bats).
+AGNOSTIC_TESTS_DIR ?= .agnostic-tests
+.PHONY: test-agnostic
+test-agnostic:
+	test -d $(AGNOSTIC_TESTS_DIR) || git clone --depth 1 https://github.com/pure-fish/agnostic-tests $(AGNOSTIC_TESTS_DIR)
+	$(MAKE) -C $(AGNOSTIC_TESTS_DIR) test IMPLEMENTATION=go GO_PURE_DIR=$(CURDIR)
