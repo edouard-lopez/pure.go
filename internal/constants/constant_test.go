@@ -29,3 +29,11 @@ func TestPromptSymbol(t *testing.T) {
 
 	assert.Equal(t, expected, actual)
 }
+
+func TestGitDirtySymbol(t *testing.T) {
+	expected := "*"
+
+	actual := GitDirtySymbol
+
+	assert.Equal(t, expected, actual)
+}

@@ -5,8 +5,10 @@ import (
 	"text/template"
 )
 
-const PromptLayout = `{{.CurrentWorkingDir}}` +
-	`{{if .GitBranch}} {{.GitBranch}}{{end}}` +
+// PromptLayout starts with a blank line to separate the prompt from previous output, like Fish's new_line.
+const PromptLayout = "\n" +
+	`{{.CurrentWorkingDir}}` +
+	`{{if .GitBranch}} {{.GitBranch}}{{.GitDirty}}{{end}}` +
 	`{{if .GoVersion}} 🐐{{.GoVersion}}{{end}}` +
 	"\n" +
 	`{{.Symbol}}`
@@ -17,6 +19,7 @@ type Prompt struct {
 	Symbol            string
 	GoVersion         string
 	GitBranch         string
+	GitDirty          string
 }
 
 func (prompt Prompt) String() string {
