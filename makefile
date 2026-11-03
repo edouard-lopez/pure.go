@@ -1,8 +1,8 @@
 # Install development tools (gotestsum for testing, goreleaser for releases)
 .PHONY: install
 install:
-	go install gotest.tools/gotestsum@v1.11.0 
-	go install github.com/goreleaser/goreleaser/...@v1.21.2
+	go install gotest.tools/gotestsum@v1.13.0
+	go install github.com/goreleaser/goreleaser/v2@v2.19.0
 
 # Run unit tests (excludes e2e tests in cmd/)
 .PHONY: test
