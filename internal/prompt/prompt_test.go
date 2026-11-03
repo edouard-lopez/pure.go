@@ -17,7 +17,9 @@ func Test_Prompt_serialize_correctly(t *testing.T) {
 		GoVersion:         "1.2.3",
 	}
 
-	expected := "\n/home/edouard 🐐1.2.3\n" + colorize.Danger("❯")
+	expected := "\n" +
+		"/home/edouard 🐐1.2.3\n" +
+		colorize.Danger("❯")
 
 	actual := prompt.String()
 
@@ -32,7 +34,9 @@ func Test_Prompt_shows_git_dirty_after_branch(t *testing.T) {
 		GitDirty:          "*",
 	}
 
-	expected := "\n/repo main*\n❯"
+	expected := "\n" +
+		"/repo main*\n" +
+		"❯"
 
 	actual := prompt.String()
 
