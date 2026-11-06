@@ -20,7 +20,7 @@
 3. Try to execute manually
 
     ```sh
-    $ /path/to/pure -version --last-command-status $status
+    $ /path/to/pure -version --last-command-status $?
     # should print something like:
     ~/projects/contributions/pure.go 🐐go1.20.3
     0 ❯
@@ -42,14 +42,18 @@ end
 
 ### Zsh
 
+Enable `PROMPT_SUBST` and single-quote `PROMPT`, so the command runs on
+every prompt instead of once when `.zshrc` loads:
+
 ```zsh
-PROMPT=$(/path/to/pure -version --last-command-status $status)
+setopt PROMPT_SUBST
+PROMPT='$(/path/to/pure -version --last-command-status $?)'
 ```
 
 ### Bash
 
 ```sh
-export PS1='$(/path/to/pure -version --last-command-status $status)'
+export PS1='$(/path/to/pure -version --last-command-status $?)'
 ```
 
 ## Development
