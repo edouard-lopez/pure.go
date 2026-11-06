@@ -127,7 +127,7 @@ Create a `pure` binary in the project's root directory.
 ## Gap matrix
 
 Parity with the reference [pure-fish/pure](https://github.com/pure-fish/pure) implementation.
-See [How Pure works](https://pure-fish.github.io/pure/doc/#how-it-works) for the Fish internals, and the [From Fish to Go](https://github.com/edouard-lopez/pure.go/wiki/From-Fish-to-Go) wiki page for the porting guide.
+See [How Pure works](https://pure-fish.github.io/pure/doc/#how-it-works) for the Fish internals, and the [From Fish to Go](from-fish-to-go.md) guide for the porting guide.
 
 ✅ done · 🟡 partial · ❌ missing. Phases match the repository milestones.
 
